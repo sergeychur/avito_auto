@@ -1,9 +1,13 @@
 package repository
 
-func (repo *PostgresRepository) InsertLink() {
+import (
+	"github.com/sergeychur/avito_auto/internal/models"
+)
+
+func (repo *PostgresRepository) InsertLink(link models.Link) (int, models.Link){
 	panic("implement me")
 }
 
-func (repo *PostgresRepository) GetLink() {
+func (repo *PostgresRepository) GetLink() (int, models.Link) {
 	panic("implement me")
 }

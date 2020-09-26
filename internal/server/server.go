@@ -27,7 +27,8 @@ func NewServer(pathToConfig string) (*Server, error) {
 	nickPattern := "^[A-Za-z0-9_\\.-]+$"*/
 
 	subRouter := chi.NewRouter()
-	//subRouter.Get("/link/get")
+	subRouter.Get("/link/get", server.GetLink)
+	subRouter.Post("/link/create", server.CreateLink)
 
 	r.Mount("/api/", subRouter)
 	server.router = r
