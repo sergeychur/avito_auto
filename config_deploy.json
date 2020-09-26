@@ -1,0 +1,8 @@
+{
+  "port": "8091",
+  "dbhost": "db",
+  "dbport": "5432",
+  "dbuser": "docker",
+  "dbpassword": "docker",
+  "dbname" : "docker"
+}
