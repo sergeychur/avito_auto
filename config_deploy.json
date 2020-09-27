@@ -6,5 +6,6 @@
   "dbpassword": "docker",
   "dbname" : "docker",
   "doc_path": "/home/app/doc",
-  "allowed_hosts": ["http://localhost:8091"]
+  "valid_request_timeout": 1,
+  "allowed_hosts": ["http://localhost:8091", "http://localhost:8080", "127.0.0.1:8080"]
 }

@@ -44,14 +44,18 @@ handleResult = (result) => {
 }
 
 formError = (status) => {
+    console.log(status);
     switch (status) {
         case 403:
             return 'Это действие запрещено, короткая ссылка с таким именем уже создана';
         case 404:
             return 'Такой ссылки не существует';
+        case 400:
+            return 'Некорректный ввод';
+        default:
+            return `Ошибка с кодом ${status}`;
 
     }
-    return undefined;
 }
 
 function onButtonClick() {

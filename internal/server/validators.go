@@ -25,7 +25,7 @@ func ValidateURLExists(timeOut time.Duration, url string) error {
 	client := http.Client{
 		Timeout: timeout,
 	}
-	_, err := client.Get(url)
+	_, err := client.Head(url)
 	if err != nil {
 		return err
 	}
