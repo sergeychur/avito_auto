@@ -13,7 +13,7 @@ schemes:
   - "https"
   - "http"
 paths:
-  /link/get/{shortcut}:
+  /link/{shortcut}:
     get:
       tags: ["link"]
       summary: "Получить перенаправление на URL, задаваемый полной ссылкой"
@@ -27,7 +27,7 @@ paths:
           description: Такое сокращение есть у нас, перенаправляем
         404:
           description: Еще не создали это сокращение
-  /link/create:
+  /link:
     post:
       tags: ["link"]
 

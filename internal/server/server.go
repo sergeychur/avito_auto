@@ -4,6 +4,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/sergeychur/avito_auto/internal/config"
+	"github.com/sergeychur/avito_auto/internal/middlewares"
 	"github.com/sergeychur/avito_auto/internal/repository"
 	"log"
 	"net/http"
@@ -20,18 +21,18 @@ type Server struct {
 func NewServer(pathToConfig string) (*Server, error) {
 	server := new(Server)
 	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-	r.Use(middleware.Recoverer)
 	newConfig, err := config.NewConfig(pathToConfig)
 	if err != nil {
 		log.Println("Cannot create config instance because of: ", err)
 		return nil, err
 	}
 	server.config = newConfig
-
+	r.Use(middleware.Logger,
+		middleware.Recoverer,
+		middlewares.CreateCorsMiddleware(server.config.AllowedHosts))
 	subRouter := chi.NewRouter()
-	subRouter.Get("/link/get/{shortcut}", server.GetLink)
-	subRouter.Post("/link/create", server.CreateLink)
+	subRouter.Get("/link/{shortcut}", server.GetLink)
+	subRouter.Post("/link", server.CreateLink)
 
 	r.Mount("/api/", subRouter)
 	r.Get("/doc/{file:.+\\..+$}", http.StripPrefix("/doc/",

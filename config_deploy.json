@@ -5,5 +5,6 @@
   "dbuser": "docker",
   "dbpassword": "docker",
   "dbname" : "docker",
-  "doc_path": "/home/app/doc"
+  "doc_path": "/home/app/doc",
+  "allowed_hosts": ["http://localhost:8091"]
 }

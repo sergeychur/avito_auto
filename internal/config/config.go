@@ -7,6 +7,7 @@ import (
 
 type Config struct {
 	Port   string `json:"port"`
+	AllowedHosts []string `json:"allowed_hosts"`
 	
 	DBHost string `json:"dbhost"`
 	DBPort string `json:"dbport"`
@@ -18,6 +19,7 @@ type Config struct {
 	
 	DocPath string `json:"doc_path"`
 	ValidRequestTimeout int `json:"valid_request_timeout"`
+
 }
 
 func NewConfig(pathToConfig string) (*Config, error) {

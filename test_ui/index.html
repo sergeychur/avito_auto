@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест сервиса для сокращения URL</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div>
+        <h1>
+            Создание короткой ссылки
+        </h1>
+    </div>
+    <div>
+        <p>
+            Введите полный адрес:
+        </p>
+        <input type="text" id="full_input">
+    </div>
+    <div>
+        <p>
+            Введите желаемый короткий адрес:
+        </p>
+        <input type="text" id="short_input">
+    </div>
+    <div>
+        <button id="transform_button" onclick=onButtonClick()>Преобразовать</button>
+    </div>
+
+    <div id="result" hidden>
+        <p>
+            Сокращенная ссылка:
+        </p>
+        <a href="#" id="result_link"></a>
+    </div>
+    <div id="errors"></div>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
