@@ -4,5 +4,6 @@
   "dbport": "5432",
   "dbuser": "docker",
   "dbpassword": "docker",
-  "dbname" : "docker"
+  "dbname" : "docker",
+  "doc_path": "/home/app/doc"
 }

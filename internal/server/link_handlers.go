@@ -1,7 +1,9 @@
 package server
 
 import (
+	"github.com/go-chi/chi"
 	"github.com/sergeychur/avito_auto/internal/models"
+	"github.com/sergeychur/avito_auto/internal/repository"
 	"log"
 	"net/http"
 )
@@ -14,8 +16,9 @@ func (server *Server) CreateLink(w http.ResponseWriter, r *http.Request) {
 		WriteToResponse(w, http.StatusBadRequest, nil)
 		return
 	}
-	err = ValidateLink(link)
+	err = ValidateLink(server.config.ValidRequestTimeout, link)
 	if err != nil {
+		log.Println("URL is invalid: ", err)
 		WriteToResponse(w, http.StatusBadRequest, "Link is invalid")
 		return
 	}
@@ -24,6 +27,11 @@ func (server *Server) CreateLink(w http.ResponseWriter, r *http.Request) {
 }
 
 func (server *Server) GetLink(w http.ResponseWriter, r *http.Request) {
-	newUrl := "https://google.com"
+	shortcut := chi.URLParam(r, "shortcut")
+	status, newUrl := server.repo.GetLink(shortcut)
+	if status != repository.OK {
+		DealRequestFromRepo(w, nil, status)
+		return
+	}
 	http.Redirect(w, r, newUrl, http.StatusSeeOther)
 }

@@ -1,0 +1,66 @@
+swagger: "2.0"
+info:
+  description: "API сервиса для сокращения URL"
+  version: "1.0.0"
+  title: "URL shortener"
+basePath: "/api"
+tags:
+  - name: "link"
+    description: "Для сокращения ссылок"
+  - name: "doc"
+    description: "Получение этой документации"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /link/get/{shortcut}:
+    get:
+      tags: ["link"]
+      summary: "Получить перенаправление на URL, задаваемый полной ссылкой"
+      parameters:
+        - name: "shortcut"
+          in: "path"
+          type: "string"
+          required: true
+      responses:
+        303:
+          description: Такое сокращение есть у нас, перенаправляем
+        404:
+          description: Еще не создали это сокращение
+  /link/create:
+    post:
+      tags: ["link"]
+
+      summary: "Создать новую короткую ссылку"
+      parameters:
+        - in: "body"
+          name: "link"
+          description: "Данные о ссылке"
+          required: true
+          schema:
+            $ref: "#/definitions/Link"
+      responses:
+        403:
+          description: "Уже существует сокращение с именем, которое задал пользователь"
+        201:
+          description: "Успешно создали"
+          schema:
+            $ref: "#/definitions/Link"
+  /doc/doc.html:
+    get:
+      tags: ["doc"]
+      responses:
+        200:
+          description: "возвращает html с этой документацией"
+
+
+definitions:
+  Link:
+    type: "object"
+    properties:
+      real_url:
+        type: "string"
+        description: "url, который сокращаем"
+      shortcut:
+        type: "string"
+        description: "сокращенный url, в запросе на сокращение это поле может быть пустым, если пользователь не хочет давать кастомную ссылку"

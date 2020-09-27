@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger UI</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.2.2/swagger-ui.css" >
+  <style>
+    html
+    {
+      box-sizing: border-box;
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
+    *,
+    *:before,
+    *:after
+    {
+      box-sizing: inherit;
+    }
+    body {
+      margin:0;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+<div id="swagger-ui"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.2.2/swagger-ui-bundle.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.2.2/swagger-ui-standalone-preset.js"> </script>
+<script>
+window.onload = function() {
+  var spec = {"swagger": "2.0", "info": {"description": "API \u0441\u0435\u0440\u0432\u0438\u0441\u0430 \u0434\u043b\u044f \u0441\u043e\u043a\u0440\u0430\u0449\u0435\u043d\u0438\u044f URL", "version": "1.0.0", "title": "URL shortener"}, "basePath": "/api", "tags": [{"name": "link", "description": "\u0414\u043b\u044f \u0441\u043e\u043a\u0440\u0430\u0449\u0435\u043d\u0438\u044f \u0441\u0441\u044b\u043b\u043e\u043a"}, {"name": "doc", "description": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u044d\u0442\u043e\u0439 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438"}], "schemes": ["https", "http"], "paths": {"/link/get/{shortcut}": {"get": {"tags": ["link"], "summary": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u043f\u0435\u0440\u0435\u043d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043d\u0430 URL, \u0437\u0430\u0434\u0430\u0432\u0430\u0435\u043c\u044b\u0439 \u043f\u043e\u043b\u043d\u043e\u0439 \u0441\u0441\u044b\u043b\u043a\u043e\u0439", "parameters": [{"name": "shortcut", "in": "path", "type": "string", "required": true}], "responses": {"303": {"description": "\u0422\u0430\u043a\u043e\u0435 \u0441\u043e\u043a\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u0435\u0441\u0442\u044c \u0443 \u043d\u0430\u0441, \u043f\u0435\u0440\u0435\u043d\u0430\u043f\u0440\u0430\u0432\u043b\u044f\u0435\u043c"}, "404": {"description": "\u0415\u0449\u0435 \u043d\u0435 \u0441\u043e\u0437\u0434\u0430\u043b\u0438 \u044d\u0442\u043e \u0441\u043e\u043a\u0440\u0430\u0449\u0435\u043d\u0438\u0435"}}}}, "/link/create": {"post": {"tags": ["link"], "summary": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u0443\u044e \u043a\u043e\u0440\u043e\u0442\u043a\u0443\u044e \u0441\u0441\u044b\u043b\u043a\u0443", "parameters": [{"in": "body", "name": "link", "description": "\u0414\u0430\u043d\u043d\u044b\u0435 \u043e \u0441\u0441\u044b\u043b\u043a\u0435", "required": true, "schema": {"$ref": "#/definitions/Link"}}], "responses": {"403": {"description": "\u0423\u0436\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442 \u0441\u043e\u043a\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u0441 \u0438\u043c\u0435\u043d\u0435\u043c, \u043a\u043e\u0442\u043e\u0440\u043e\u0435 \u0437\u0430\u0434\u0430\u043b \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c"}, "201": {"description": "\u0423\u0441\u043f\u0435\u0448\u043d\u043e \u0441\u043e\u0437\u0434\u0430\u043b\u0438", "schema": {"$ref": "#/definitions/Link"}}}}}, "/doc/doc.html": {"get": {"tags": ["doc"], "responses": {"200": {"description": "\u0432\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 html \u0441 \u044d\u0442\u043e\u0439 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0435\u0439"}}}}}, "definitions": {"Link": {"type": "object", "properties": {"real_url": {"type": "string", "description": "url, \u043a\u043e\u0442\u043e\u0440\u044b\u0439 \u0441\u043e\u043a\u0440\u0430\u0449\u0430\u0435\u043c"}, "shortcut": {"type": "string", "description": "\u0441\u043e\u043a\u0440\u0430\u0449\u0435\u043d\u043d\u044b\u0439 url, \u0432 \u0437\u0430\u043f\u0440\u043e\u0441\u0435 \u043d\u0430 \u0441\u043e\u043a\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u044d\u0442\u043e \u043f\u043e\u043b\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c, \u0435\u0441\u043b\u0438 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043d\u0435 \u0445\u043e\u0447\u0435\u0442 \u0434\u0430\u0432\u0430\u0442\u044c \u043a\u0430\u0441\u0442\u043e\u043c\u043d\u0443\u044e \u0441\u0441\u044b\u043b\u043a\u0443"}}}}};
+  // Build a system
+  const ui = SwaggerUIBundle({
+    spec: spec,
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout"
+  })
+  window.ui = ui
+}
+</script>
+</body>
+</html>

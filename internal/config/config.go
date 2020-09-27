@@ -7,6 +7,7 @@ import (
 
 type Config struct {
 	Port   string `json:"port"`
+	
 	DBHost string `json:"dbhost"`
 	DBPort string `json:"dbport"`
 	DBUser string `json:"dbuser"`
@@ -14,6 +15,9 @@ type Config struct {
 	DBName string `json:"dbname"`
 	DBMaxConn int `json:"db_max_conn"`
 	DBAcquireTimeout int `json:"db_acquire_timeout"`
+	
+	DocPath string `json:"doc_path"`
+	ValidRequestTimeout int `json:"valid_request_timeout"`
 }
 
 func NewConfig(pathToConfig string) (*Config, error) {

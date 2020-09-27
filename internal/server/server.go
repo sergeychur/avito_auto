@@ -22,23 +22,22 @@ func NewServer(pathToConfig string) (*Server, error) {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
-	/*slugPattern := "^(\\d|\\w|-|_)*(\\w|-|_)(\\d|\\w|-|_)*$"
-	idPattern := "^[0-9]+$"
-	nickPattern := "^[A-Za-z0-9_\\.-]+$"*/
-
-	subRouter := chi.NewRouter()
-	subRouter.Get("/link/get", server.GetLink)
-	subRouter.Post("/link/create", server.CreateLink)
-
-	r.Mount("/api/", subRouter)
-	server.router = r
-
 	newConfig, err := config.NewConfig(pathToConfig)
 	if err != nil {
 		log.Println("Cannot create config instance because of: ", err)
 		return nil, err
 	}
 	server.config = newConfig
+
+	subRouter := chi.NewRouter()
+	subRouter.Get("/link/get/{shortcut}", server.GetLink)
+	subRouter.Post("/link/create", server.CreateLink)
+
+	r.Mount("/api/", subRouter)
+	r.Get("/doc/{file:.+\\..+$}", http.StripPrefix("/doc/",
+		http.FileServer(http.Dir(server.config.DocPath))).ServeHTTP)
+	server.router = r
+
 	dbPort, err := strconv.Atoi(server.config.DBPort)
 	if err != nil {
 		return nil, err

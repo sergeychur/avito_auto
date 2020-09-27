@@ -35,3 +35,5 @@ services:
       - db
     command:
       /bin/bash -c "/home/app/wait_for_it.sh -t 600 db:5432 && /home/app/api.out /home/app/config_deploy.json"
+    volumes:
+      - ./doc:/home/app/doc
