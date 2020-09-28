@@ -8,12 +8,22 @@ import (
 	"time"
 )
 
-func ValidateLink(timeOut int, link models.Link) error {
+type Validator struct {
+	TimeOut int
+}
+
+func NewValidator(timeOut int) *Validator {
+	validator := new(Validator)
+	validator.TimeOut = timeOut
+	return validator
+}
+
+func (v *Validator)ValidateLink(/*timeOut int,*/ link models.Link) error {
 	err := ValidateFormat(link.RealURL)
 	if err != nil {
 		return err
 	}
-	err = ValidateURLExists(time.Duration(timeOut), link.RealURL)
+	err = ValidateURLExists(time.Duration(v.TimeOut), link.RealURL)
 	if err != nil {
 		return err
 	}
